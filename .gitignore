@@ -1,0 +1,20 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Virtual environment folders
+.env
+.venv/
+venv/
+ENV/
+
+# Database file
+app.db
+
+# macOS / OS files
+.DS_Store
+
+# IDE folders
+.vscode/
+.idea/
+
