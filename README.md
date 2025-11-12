@@ -54,6 +54,7 @@ It includes basic routes, templates, and a static progress bar to visualize the 
 ---
 
 ## 🗂️ Project Structure
+'''
 app/
 ├── __init__.py          # app factory: create_app()
 ├── config.py            # SQLite URI + SECRET_KEY placeholder
@@ -75,6 +76,10 @@ run.py                   # entry point calling create_app()
 requirements.txt         # dependencies
 README.md                # setup/run, structure rationale, screenshot, team roles
 .gitignore               # ignored files
+
+'''
+
+<img width="1000" height="852" alt="image" src="https://github.com/user-attachments/assets/44314042-02c0-437f-8aea-a8524bd3a9f9" />
 
 
 ---
@@ -100,7 +105,16 @@ README.md                # setup/run, structure rationale, screenshot, team role
 ## 📸 Screenshot
 
 Here’s the M1 prototype running locally:
-(ScreenShots)
+
+
+#### Home Page
+<img width="437" height="304" alt="Screenshot 2025-11-12 at 12 28 01 AM" src="https://github.com/user-attachments/assets/a1852419-75cd-4d84-a134-bfd638cee1f8" />
+
+#### Feature Page
+<img width="437" height="304" alt="Screenshot 2025-11-12 at 12 28 30 AM" src="https://github.com/user-attachments/assets/098b1b33-98f1-4ee9-8505-097abaaffef9" />
+
+#### Login Page
+<img width="437" height="304" alt="Screenshot 2025-11-12 at 12 28 46 AM" src="https://github.com/user-attachments/assets/e5ab27cd-e301-4c7d-a3a4-3598d8f3890e" />
 
 
 ---
