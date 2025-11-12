@@ -54,7 +54,8 @@ It includes basic routes, templates, and a static progress bar to visualize the 
 ---
 
 ## 🗂️ Project Structure
-'''
+
+```
 app/
 ├── __init__.py          # app factory: create_app()
 ├── config.py            # SQLite URI + SECRET_KEY placeholder
@@ -72,12 +73,12 @@ app/
 │       └── feature.html
 ├── templates/base.html  # base layout with nav + flash messages
 └── static/styles.css    # basic CSS styling
+
 run.py                   # entry point calling create_app()
 requirements.txt         # dependencies
 README.md                # setup/run, structure rationale, screenshot, team roles
 .gitignore               # ignored files
-
-'''
+```
 
 <img width="1000" height="852" alt="image" src="https://github.com/user-attachments/assets/44314042-02c0-437f-8aea-a8524bd3a9f9" />
 
