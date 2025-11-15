@@ -2,11 +2,39 @@
 {% block title %}Feature — TMJ{% endblock %}
 {% block content %}
 <h1>Feature Demo</h1>
+
+<!-- Short description text above the bar -->
 <p>Progress (demo):</p>
+
+<!--
+  Progress bar container:
+  - Acts as the "empty" background of the progress bar.
+  - The .progress class can be styled in CSS to set its width,
+    height, border-radius, and background color (like light gray).
+-->
 <div class="progress">
+
+  <!--
+    Filled bar section:
+    - Represents the "completed" portion of progress.
+    - The inline style width:60% controls how much of the bar is filled.
+    - The .bar class is styled in CSS to set the color (like blue) and rounded edges.
+    - For M1, this is hard-coded to 60% just for visual demo.
+    - Later (in M2+), this width could come from real data (e.g., {{ progress }}%).
+  -->
   <div class="bar" style="width:60%"></div>
 </div>
+
+<!--
+  Simple label text showing numeric percentage.
+  Hard-coded for M1 to match the width above.
+-->
 <p>60% Complete (hard-coded for M1)</p>
+
+<!--
+  A disabled button placeholder.
+  Shows where user interaction will go later
+  (for example, marking a lesson as complete in M2).
+-->
 <button disabled>Mark as done (not implemented)</button>
 {% endblock %}
-
