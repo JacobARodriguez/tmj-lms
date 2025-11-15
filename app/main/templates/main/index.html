@@ -1,8 +1,18 @@
+{# 
+  index.html — Home page template
+  --------------------------------------------------------
+  How it's used:
+  - Triggered by @main_bp.route("/") in main/routes.py
+  - Rendered when the user clicks "Home" in the nav bar.
+  - Extends base.html to reuse the common layout (head, nav, etc.)
+  - Replaces the {% block title %} and {% block content %} parts of base.html.
+  --------------------------------------------------------
+#}
 {% extends "base.html" %}
 {% block title %}Home — TMJ{% endblock %}
 {% block content %}
 <h1>TMJ — Track My Journey</h1>
 <p>Welcome! This is the M1 prototype.</p>
-<p>Try the <a href="{{ url_for('main.feature') }}">Feature</a> page or <a href="{{ url_for('auth.login') }}">Login</a>.</p>
+<p>Try the <a href="{{ url_for('main.feature') }}">Feature</a> page or 
+   <a href="{{ url_for('auth.login') }}">Login</a>.</p>
 {% endblock %}
-
