@@ -1,20 +1,87 @@
-{% extends "base.html" %}
-{% block title %}Login — TMJ{% endblock %}
+{# -------------------------------------------------------------
+  templates/auth/login.html
+  -------------------------------------------------------------
+  Purpose:
+    - Displays the login form (username, password, submit).
+    - Works together with:
+        → LoginForm class (in forms.py)
+        → /auth/login route (in auth/routes.py)
+        → base.html (for shared layout, nav, flash messages)
+  -------------------------------------------------------------
+  Flow:
+    1. User visits /auth/login (GET request)
+       → Flask renders this page with an empty form.
+    2. User fills in username/password and clicks "Sign In"
+       → Browser sends POST request to the same URL.
+    3. Flask processes the POST:
+       → form.validate_on_submit() checks CSRF + validators.
+       → If valid: flash message + redirect to main.index.
+       → If invalid: re-render this template showing errors.
+  ------------------------------------------------------------- #}
+
+{% extends "base.html" %}   {# Inherit the layout and nav bar from base.html #}
+
+{% block title %}Login — TMJ{% endblock %}   {# Sets the tab title in the browser #}
+
 {% block content %}
 <h1>Login</h1>
+
+{# -------------------------------------------------------------
+  Form Section
+  -------------------------------------------------------------
+  - method="post": sends form data securely in the request body
+    (used for submitting data to the server, not retrieving).
+  - novalidate: disables browser’s default HTML validation so
+    Flask-WTF handles it on the server side.
+  ------------------------------------------------------------- #}
 <form method="post" novalidate>
+
+  {# 
+    CSRF token for protection (added automatically by Flask-WTF)
+    {{ form.hidden_tag() }} inserts a hidden input containing
+    a secure token linked to SECRET_KEY in config.py.
+  #}
   {{ form.hidden_tag() }}
+
+  {# ---------------------- Username Field --------------------- #}
   <p>
+    {# Label: shows "Username" before the input box #}
     {{ form.username.label }}<br>
+
+    {# Input box: size=32 sets width; value handled by WTForms #}
     {{ form.username(size=32) }}
-    {% for e in form.username.errors %}<span class="error">{{ e }}</span>{% endfor %}
+
+    {# Error loop: if the user leaves it blank or invalid, this
+       displays the error message ("This field is required.") #}
+    {% for e in form.username.errors %}
+      <span class="error">{{ e }}</span>
+    {% endfor %}
   </p>
+
+  {# ---------------------- Password Field --------------------- #}
   <p>
     {{ form.password.label }}<br>
     {{ form.password(size=32) }}
-    {% for e in form.password.errors %}<span class="error">{{ e }}</span>{% endfor %}
-  </p>
-  <p>{{ form.submit() }}</p>
-</form>
-{% endblock %}
 
+    {# Same logic as username: show any validation errors #}
+    {% for e in form.password.errors %}
+      <span class="error">{{ e }}</span>
+    {% endfor %}
+  </p>
+
+  {# ---------------------- Submit Button ---------------------- #}
+  <p>
+    {# Renders the "Sign In" button from the form definition #}
+    {{ form.submit() }}
+  </p>
+</form>
+
+{# -------------------------------------------------------------
+  Summary:
+  - GET request → Shows empty form.
+  - POST request → Submits data to /auth/login.
+      → If valid: flash("Login not implemented.") + redirect.
+      → If invalid: re-render with {{ form.field.errors }} visible.
+  ------------------------------------------------------------- #}
+
+{% endblock %}
