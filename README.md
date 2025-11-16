@@ -169,11 +169,11 @@ Below are the wireframes for TMJ, illustrating the planned UI layout for all pro
 
 ## **Milestone 2 — Dynamic Course Progress Pages**
 
-### **Course In Progress**
+### **Course In Progress Sketch**
 _Shows real-time completion values using database data._
 ![Course In Progress](docs/course-in-progress.png)
 
-### **Course Completed**
+### **Course Completed Sketch**
 _Displays when a student finishes all lessons and objectives._
 ![Course Completed](docs/course-completed.png)
 
