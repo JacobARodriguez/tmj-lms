@@ -118,6 +118,9 @@ README.md                # setup/run, structure rationale, screenshot, team role
 * Static progress bar demo (60 %)
 * Base template with navigation and flash message area
 * SQLite + SQLAlchemy configured but not used yet
+* as well as in new contributions updated the base.html to use new structure
+* styles.css was adjusted with an expanded layout (nav, flashes, progress bar)
+* uploaded the screenshots to //docs and updated the pages that had changes
 
 ---
 
