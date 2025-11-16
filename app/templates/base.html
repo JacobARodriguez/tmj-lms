@@ -1,88 +1,50 @@
-<!--
-  TEMPLATE RELATIONSHIP & PAGE FLOW
-  =======================================================================
-  base.html  ←  main/index.html
-  base.html  ←  main/feature.html
-  base.html  ←  auth/login.html
-
-  Notes (plain text, no Jinja tags here):
-  - base.html is the shared layout (shell) for the whole site.
-  - Child templates extend base.html and fill the "content block" area.
-  - The nav bar and flash messages live here so all pages get them.
-
-  HOW NAVIGATION WORKS
-  -----------------------------------------------------------------------
-  Each link below points to a Flask route. Example:
-      [Home link] -> url_for(main.index)
-  When clicked:
-      1) Flask resolves the URL to the route decorated for "/"
-      2) That route (in main/routes.py) runs the index() function
-      3) The function renders main/index.html
-      4) index.html extends base.html, so Flask merges layout + page content
-  =======================================================================
--->
-
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Character encoding (standard for modern webpages) -->
     <meta charset="utf-8">
-
-    <!-- Responsive behavior on phones (prevents tiny, zoomed-out pages) -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--
-      <title> is NOT shown on the page body.
-      It shows in the browser tab and bookmarks/search results.
-      Child pages may override the page title using a title block.
-    -->
-    <title>{% block title %}TMJ — Track My Journey{% endblock %}</title>
+    <title>{% block title %}Track My Journey LMS{% endblock %}</title>
 
-    <!-- Link to your shared CSS file in /app/static/styles.css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <!-- Optional: favicon
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    -->
   </head>
 
   <body>
-    <!--
-      Site-wide navigation.
-      These links appear horizontally at the top of every page because
-      this <nav> is the first element inside <body>, and links are inline.
-    -->
-    <nav class="nav">
-      <a href="{{ url_for('main.index') }}">Home</a>
-      <a href="{{ url_for('main.feature') }}">Feature</a>
-      <a href="{{ url_for('auth.login') }}">Login</a>
-    </nav>
+    <header class="site-header">
+      <div class="site-brand">
+        <a href="{{ url_for('main.index') }}">TMJ — Track My Journey</a>
+      </div>
 
-    <!--
-      Flash message area:
-      Purpose:
-        Displays any messages "flashed" from Flask routes.
-        Example flow (plain text):
-          - A route calls flash("Login not implemented yet!")
-          - Then redirects to another page
-          - This block retrieves and shows those messages once
-    -->
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class="flashes">
-          {% for m in messages %}
-            <li>{{ m }}</li>
-          {% endfor %}
+      <nav class="site-nav">
+        <ul>
+          <li><a href="{{ url_for('main.index') }}">Home</a></li>
+          <li><a href="{{ url_for('main.feature') }}">Progress Demo</a></li>
+          <li><a href="{{ url_for('auth.login') }}">Login</a></li>
         </ul>
-      {% endif %}
-    {% endwith %}
+      </nav>
+    </header>
 
-    <!--
-      Main content area:
-      Child templates (index.html, feature.html, login.html) override the
-      page content inside this block to keep a consistent layout.
-    -->
-    <main>
-      {% block content %}{% endblock %}
+    <main class="layout-main">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash-region">
+            <ul class="flash-list">
+              {% for m in messages %}
+                <li class="flash-item">{{ m }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <section class="page-content">
+        {% block content %}{% endblock %}
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <small>&copy; 2025 Track My Journey</small>
+    </footer>
   </body>
 </html>
+
