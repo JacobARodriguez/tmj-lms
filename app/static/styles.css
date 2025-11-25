@@ -384,3 +384,108 @@ body {
     color: #6b7280;
 }
 
+/* ==========================
+   LOGIN PAGE LAYOUT
+   ========================== */
+
+.auth-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* LEFT side (video) */
+.login-hero-video {
+  width: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(80, 120, 255, 0.4);
+}
+
+.auth-visual {
+  padding: 1rem;
+}
+
+/* RIGHT side (form card) */
+.auth-card {
+  background: #111827;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.auth-title {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  color: #E2E8F0;
+}
+
+.auth-subtitle {
+  color: #9CA3AF;
+  margin-bottom: 1.5rem;
+}
+
+/* Form fields */
+.form-label {
+  color: #E2E8F0;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-bottom: 1rem;
+  background: #1F2937;
+  color: #E5E7EB;
+}
+
+/* Submit button */
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(90deg, #2563EB, #7C3AED);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Notes and flash messages */
+.auth-note {
+  margin-top: 1rem;
+  color: #9CA3AF;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.auth-flashes .flash {
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.flash-error {
+  background: rgba(255, 0, 60, 0.15);
+  color: #ff2a59;
+}
+
+.flash-success {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+
