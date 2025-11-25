@@ -57,27 +57,43 @@ It includes basic routes, templates, and a static progress bar to visualize the 
 
 ```
 app/
-├── __init__.py          # app factory: create_app()
-├── config.py            # SQLite URI + SECRET_KEY placeholder
-├── models.py            # User + Course model stubs
-├── forms.py             # WTForms LoginForm
+├── __init__.py
+├── config.py
+├── models.py
+├── forms.py
+
 ├── auth/
 │   ├── __init__.py
-│   ├── routes.py        # /auth/login (GET render, POST validate + flash)
-│   └── templates/auth/login.html
+│   ├── routes.py
+│   └── templates/auth/
+│       └── login.html
+
 ├── main/
 │   ├── __init__.py
-│   ├── routes.py        # / (index), /feature
+│   ├── routes.py
 │   └── templates/main/
 │       ├── index.html
-│       └── feature.html
-├── templates/base.html  # base layout with nav + flash messages
-└── static/styles.css    # basic CSS styling
+│       ├── feature.html
+│       └── course_detail.html   ← NEW (M2)
+│
+├── templates/
+│   └── base.html
 
-run.py                   # entry point calling create_app()
-requirements.txt         # dependencies
-README.md                # setup/run, structure rationale, screenshot, team roles
-.gitignore               # ignored files
+└── static/
+    ├── styles.css
+    ├── img/                    ← NEW
+    │   ├── tmj-logo.png
+    │   ├── course-python.png
+    │   ├── completion-badge.png
+    │   ├── feature-hero.png
+    │   └── any other course thumbnails…
+    │
+    ├── video/                  ← NEW
+    │   ├── login-hero.mp4
+    │   └── optional future videos…
+    │
+    └── js/ (optional)          ← if needed JS later
+
 ```
 
 ---
