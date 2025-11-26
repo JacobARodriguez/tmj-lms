@@ -1,0 +1,13 @@
+<header class="course-header">
+  <div class="course-header-main">
+    <h1 class="course-title">{{ course_name }}</h1>
+    <span class="course-status course-status-{{ status }}">{{ status_label }}</span>
+  </div>
+
+  <div class="course-header-media">
+    <img src="{{ url_for('static', filename='img/course-python.png') }}"
+         alt="Intro to Python course thumbnail"
+         class="course-thumbnail">
+  </div>
+</header>
+

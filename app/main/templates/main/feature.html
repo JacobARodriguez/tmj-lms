@@ -1,49 +1,67 @@
 {% extends "base.html" %}
-{% block title %}Progress — Track My Journey{% endblock %}
+{% block title %}Feature — Track My Journey{% endblock %}
 
 {% block content %}
-  <h1>Progress Demo</h1>
-  <p>This page shows a sample layout for tracking progress across modules.</p>
 
-  <div class="progress-list">
-    <div class="progress-item">
-      <div class="progress-header">
-        <span>Module 1: Getting Started</span>
-        <span>60%</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 60%;"></div>
-      </div>
+<!-- ==========================================
+     HERO SECTION ( neon image)
+     ========================================== -->
+<section class="hero hero-feature">
+  <div class="hero-text">
+    <h1>See your learning journey at a glance</h1>
+    <p>
+      TMJ shows your course progress with clear, glowing dashboards so you always know what’s next.
+    </p>
+  </div>
+
+  <div class="hero-media">
+    <img src="{{ url_for('static', filename='img/feature-hero.png') }}"
+         alt="Futuristic dashboard showing course progress cards"
+         class="feature-hero-image">
+  </div>
+</section>
+
+
+<!-- ==========================================
+     ORIGINAL M1 PROGRESS DEMO
+     ========================================== -->
+
+<h1>Progress Demo</h1>
+<p>This page shows a sample layout for tracking progress across modules.</p>
+
+<div class="progress-list">
+
+  <div class="progress-item">
+    <div class="progress-header">
+      <span>Module 1: Getting Started</span>
+      <span>60%</span>
     </div>
-
-    <div class="progress-item">
-      <div class="progress-header">
-        <span>Module 2: Core Concepts</span>
-        <span>30%</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 30%;"></div>
-      </div>
-    </div>
-
-    <div class="progress-item">
-      <div class="progress-header">
-        <span>Module 3: Project Work</span>
-        <span>0%</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 0%;"></div>
-      </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 60%;"></div>
     </div>
   </div>
 
-  <p class="muted">
-    For Milestone 1, these values are hard-coded for layout only.
-    In later milestones, they can come from real course data.
-  </p>
+  <div class="progress-item">
+    <div class="progress-header">
+      <span>Module 2: Data Types</span>
+      <span>30%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 30%;"></div>
+    </div>
+  </div>
 
-  <button class="btn-primary" disabled>
-    Mark module as done (not implemented)
-  </button>
+  <div class="progress-item">
+    <div class="progress-header">
+      <span>Module 3: Loops</span>
+      <span>80%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 80%;"></div>
+    </div>
+  </div>
+
+</div>
+
 {% endblock %}
 

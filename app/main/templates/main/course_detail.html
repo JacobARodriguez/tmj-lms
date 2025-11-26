@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course_name }} — Track My Journey{% endblock %}
+
+{% block content %}
+
+<div class="course-detail-page">
+
+  <!-- ===========================================
+       COURSE HEADER (TITLE + STATUS + THUMBNAIL)
+       =========================================== -->
+  <header class="course-header">
+
+    <div class="course-header-main">
+      <h1 class="course-title">{{ course_name }}</h1>
+
+      <!-- Status badge (in-progress / completed) -->
+      <span class="course-status course-status-{{ status }}">
+        {{ status_label }}
+      </span>
+
+      <p class="course-subtitle">{{ course_tagline }}</p>
+    </div>
+
+    <!-- Course thumbnail image -->
+    <div class="course-header-media">
+      <img src="{{ url_for('static', filename='img/course-python.png') }}"
+           alt="{{ course_name }} thumbnail"
+           class="course-thumbnail">
+    </div>
+  </header>
+
+
+
+  <!-- ===========================================
+       PROGRESS BAR COMPONENT
+       =========================================== -->
+  <section class="course-section">
+    {% include "partials/_course_progress.html" %}
+  </section>
+
+
+
+  <!-- ===========================================
+       COMPLETION BANNER (shown only if completed)
+       =========================================== -->
+  {% if status == "completed" %}
+  <section class="course-section course-section-completed-banner">
+    <div class="completed-banner">
+      <div class="completed-text">
+        <h2>🎉 Course completed!</h2>
+        <p>You finished this course on {{ completion_date }}.</p>
+      </div>
+
+      <div class="completed-badge">
+        <img src="{{ url_for('static', filename='img/completion-badge.png') }}"
+             alt="Completion badge"
+             class="completion-badge-image">
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+
+
+  <!-- ===========================================
+       LESSON BREAKDOWN (COMPLETED + UPCOMING)
+       =========================================== -->
+  <section class="course-section course-lessons">
+
+    <!-- Completed lessons -->
+    <div class="lesson-column">
+      <h2>Completed lessons</h2>
+      <ul class="lesson-list lesson-list-completed">
+        {% for lesson in completed_lessons %}
+        <li>
+          <span class="lesson-icon">✔</span>
+          <span class="lesson-title">{{ lesson.title }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Upcoming lessons -->
+    <div class="lesson-column">
+      <h2>Up next</h2>
+      <ul class="lesson-list lesson-list-upcoming">
+        {% for lesson in upcoming_lessons %}
+        <li>
+          <span class="lesson-icon">▶</span>
+          <span class="lesson-title">{{ lesson.title }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+
+
+  <!-- ===========================================
+       COURSE METADATA
+       =========================================== -->
+  <section class="course-section course-meta">
+    <h2>Course details</h2>
+
+    <dl class="course-meta-list">
+      <div>
+        <dt>Estimated time</dt>
+        <dd>{{ estimated_time }}</dd>
+      </div>
+      <div>
+        <dt>Difficulty</dt>
+        <dd>{{ level }}</dd>
+      </div>
+      <div>
+        <dt>Instructor</dt>
+        <dd>{{ instructor_name }}</dd>
+      </div>
+    </dl>
+  </section>
+
+</div>
+
+{% endblock %}
+
