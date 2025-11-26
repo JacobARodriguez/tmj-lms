@@ -1,18 +1,39 @@
-{# 
-  index.html — Home page template
-  --------------------------------------------------------
-  How it's used:
-  - Triggered by @main_bp.route("/") in main/routes.py
-  - Rendered when the user clicks "Home" in the nav bar.
-  - Extends base.html to reuse the common layout (head, nav, etc.)
-  - Replaces the {% block title %} and {% block content %} parts of base.html.
-  --------------------------------------------------------
-#}
 {% extends "base.html" %}
-{% block title %}Home — TMJ{% endblock %}
+
+{% block title %}TMJ — Track My Journey{% endblock %}
+
 {% block content %}
-<h1>TMJ — Track My Journey</h1>
-<p>Welcome! This is the M1 prototype.</p>
-<p>Try the <a href="{{ url_for('main.feature') }}">Feature</a> page or 
-   <a href="{{ url_for('auth.login') }}">Login</a>.</p>
+
+<!-- HERO SECTION: logo + text -->
+<section class="home-hero">
+  <div class="home-hero-left">
+    <img src="{{ url_for('static', filename='img/tmj-logo.png') }}"
+         alt="TMJ — Track My Journey logo"
+         class="home-hero-logo">
+  </div>
+
+  <div class="home-hero-right">
+    <h1>Track your learning journey with clarity.</h1>
+    <p>
+      TMJ helps students see exactly how far they’ve gone in each course,
+      with clear progress bars and completion badges.
+    </p>
+    <a href="{{ url_for('auth.login') }}" class="btn-primary home-cta">
+      Go to login demo
+    </a>
+  </div>
+</section>
+
+<!-- ORIGINAL M1 CONTENT UNDERNEATH -->
+<section class="home-intro">
+  <h2>TMJ — Track My Journey</h2>
+  <p>Welcome! This is the M1/M2 prototype.</p>
+
+  <p>
+    TMJ focuses on simple, visible course progress so learners always know what’s done
+    and what comes next.
+  </p>
+</section>
+
 {% endblock %}
+
