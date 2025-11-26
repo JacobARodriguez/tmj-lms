@@ -4,12 +4,14 @@
 
 {% block content %}
 
-<!-- HERO SECTION: logo + text -->
+<!-- ==========================
+     HOME PAGE HERO SECTION
+     ========================== -->
 <section class="home-hero">
   <div class="home-hero-left">
-    <img src="{{ url_for('static', filename='img/tmj-logo.png') }}"
-         alt="TMJ — Track My Journey logo"
-         class="home-hero-logo">
+    <img src="{{ url_for('static', filename='img/Home-page.png') }}"
+         alt="Students happily studying together using TMJ"
+         class="home-hero-image">
   </div>
 
   <div class="home-hero-right">
@@ -24,16 +26,19 @@
   </div>
 </section>
 
-<!-- ORIGINAL M1 CONTENT UNDERNEATH -->
+
+<!-- ==========================
+     INTRO SECTION (M1/M2 INFO)
+     ========================== -->
 <section class="home-intro">
   <h2>TMJ — Track My Journey</h2>
-  <p>Welcome! This is the M1/M2 prototype.</p>
+  <p>Welcome! This is the M1/M2 prototype of our application.</p>
 
   <p>
-    TMJ focuses on simple, visible course progress so learners always know what’s done
-    and what comes next.
+    TMJ focuses on simple, visible course progress so learners always know
+    what’s completed and what comes next. The goal is to help students stay
+    motivated, organized, and confident in their learning journey.
   </p>
 </section>
 
 {% endblock %}
-
