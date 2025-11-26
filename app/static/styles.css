@@ -488,4 +488,35 @@ body {
   color: #22c55e;
 }
 
+/* ==========================
+   FEATURE PAGE HERO SECTION
+   ========================== */
+
+.hero-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 1rem 0;
+}
+
+.hero-text h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  color: #E2E8F0;  /* neon-light white */
+}
+
+.hero-text p {
+  color: #94A3B8;
+  font-size: 1.1rem;
+}
+
+.feature-hero-image {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.35);
+}
+
+
 
