@@ -1,50 +1,82 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Track My Journey LMS{% endblock %}</title>
+  <title>{% block title %}Track My Journey LMS{% endblock %}</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  </head>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
 
-  <body>
-    <header class="site-header">
-      <div class="site-brand">
-        <a href="{{ url_for('main.index') }}">TMJ — Track My Journey</a>
-      </div>
+<body>
 
-      <nav class="site-nav">
-        <ul>
-          <li><a href="{{ url_for('main.index') }}">Home</a></li>
-          <li><a href="{{ url_for('main.feature') }}">Progress Demo</a></li>
-          <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-        </ul>
-      </nav>
-    </header>
+  <!-- ===========================
+       SITE HEADER / NAVBAR
+       =========================== -->
+  <header class="site-header">
 
-    <main class="layout-main">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <div class="flash-region">
-            <ul class="flash-list">
-              {% for m in messages %}
-                <li class="flash-item">{{ m }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-      {% endwith %}
+    <!-- Left: TMJ Logo (click = go home) -->
+    <div class="site-brand">
+      <a href="{{ url_for('main.index') }}" class="nav-logo">
+        <img src="{{ url_for('static', filename='img/tmj-logo.png') }}"
+             alt="TMJ — Track My Journey logo"
+             class="logo-img">
+      </a>
+    </div>
 
-      <section class="page-content">
-        {% block content %}{% endblock %}
-      </section>
-    </main>
+    <!-- Right: Navigation Links -->
+    <nav class="site-nav">
+      <ul>
+        <!-- Highlight current page using Flask's "request.path" -->
+        <li><a href="{{ url_for('main.index') }}" 
+               class="{% if request.path == url_for('main.index') %}active{% endif %}">
+          Home
+        </a></li>
 
-    <footer class="site-footer">
-      <small>&copy; 2025 Track My Journey</small>
-    </footer>
-  </body>
+        <li><a href="{{ url_for('main.feature') }}" 
+               class="{% if request.path == url_for('main.feature') %}active{% endif %}">
+          Feature
+        </a></li>
+
+        <li><a href="{{ url_for('auth.login') }}" 
+               class="{% if request.path.startswith('/auth') %}active{% endif %}">
+          Login
+        </a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- ===========================
+       FLASH MESSAGE AREA
+       Appears below navbar
+       =========================== -->
+  <section class="flash-wrapper">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </section>
+
+  <!-- ===========================
+       MAIN PAGE CONTENT
+       Each page plugs content here
+       =========================== -->
+  <main class="site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ===========================
+       FOOTER (Optional)
+       =========================== -->
+  <footer class="site-footer">
+    <p>&copy; {{ current_year or 2025 }} TMJ — Track My Journey</p>
+  </footer>
+
+</body>
 </html>
-

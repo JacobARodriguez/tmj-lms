@@ -18,70 +18,65 @@
        → If valid: flash message + redirect to main.index.
        → If invalid: re-render this template showing errors.
   ------------------------------------------------------------- #}
+{% extends "base.html" %}
 
-{% extends "base.html" %}   {# Inherit the layout and nav bar from base.html #}
-
-{% block title %}Login — TMJ{% endblock %}   {# Sets the tab title in the browser #}
+{% block title %}Login — Track My Journey{% endblock %}
 
 {% block content %}
-<h1>Login</h1>
 
-{# -------------------------------------------------------------
-  Form Section
-  -------------------------------------------------------------
-  - method="post": sends form data securely in the request body
-    (used for submitting data to the server, not retrieving).
-  - novalidate: disables browser’s default HTML validation so
-    Flask-WTF handles it on the server side.
-  ------------------------------------------------------------- #}
-<form method="post" novalidate>
+<!-- ============================================
+     LOGIN PAGE LAYOUT
+     Two columns:
+       Left  = hero video
+       Right = login form
+     ============================================ -->
+<div class="auth-layout">
 
-  {# 
-    CSRF token for protection (added automatically by Flask-WTF)
-    {{ form.hidden_tag() }} inserts a hidden input containing
-    a secure token linked to SECRET_KEY in config.py.
-  #}
-  {{ form.hidden_tag() }}
+  <!-- LEFT SIDE: HERO VIDEO -->
+  <div class="auth-visual">
+    <video autoplay muted loop playsinline class="login-hero-video">
+      <source src="{{ url_for('static', filename='video/login-hero.mp4') }}" type="video/mp4">
+    </video>
+  </div>
 
-  {# ---------------------- Username Field --------------------- #}
-  <p>
-    {# Label: shows "Username" before the input box #}
-    {{ form.username.label }}<br>
+  <!-- RIGHT SIDE: LOGIN FORM CARD -->
+  <div class="auth-card">
+    <h1 class="auth-title">Welcome Back</h1>
+    <p class="auth-subtitle">Sign in to continue your learning journey</p>
 
-    {# Input box: size=32 sets width; value handled by WTForms #}
-    {{ form.username(size=32) }}
+    <!-- FLASH MESSAGES (error, success) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="auth-flashes">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
 
-    {# Error loop: if the user leaves it blank or invalid, this
-       displays the error message ("This field is required.") #}
-    {% for e in form.username.errors %}
-      <span class="error">{{ e }}</span>
-    {% endfor %}
-  </p>
+    <!-- LOGIN FORM -->
+    <form method="POST" class="auth-form">
+      {{ form.hidden_tag() }}
 
-  {# ---------------------- Password Field --------------------- #}
-  <p>
-    {{ form.password.label }}<br>
-    {{ form.password(size=32) }}
+      <div class="form-field">
+        {{ form.email.label(class="form-label") }}
+        {{ form.email(class="form-input") }}
+      </div>
 
-    {# Same logic as username: show any validation errors #}
-    {% for e in form.password.errors %}
-      <span class="error">{{ e }}</span>
-    {% endfor %}
-  </p>
+      <div class="form-field">
+        {{ form.password.label(class="form-label") }}
+        {{ form.password(class="form-input") }}
+      </div>
 
-  {# ---------------------- Submit Button ---------------------- #}
-  <p>
-    {# Renders the "Sign In" button from the form definition #}
-    {{ form.submit() }}
-  </p>
-</form>
+      <button type="submit" class="btn-primary">
+        {{ form.submit.label.text or "Login" }}
+      </button>
 
-{# -------------------------------------------------------------
-  Summary:
-  - GET request → Shows empty form.
-  - POST request → Submits data to /auth/login.
-      → If valid: flash("Login not implemented.") + redirect.
-      → If invalid: re-render with {{ form.field.errors }} visible.
-  ------------------------------------------------------------- #}
+      <p class="auth-note">Login is a demo only for M2 (no real authentication yet).</p>
+    </form>
+  </div>
+
+</div>
 
 {% endblock %}
