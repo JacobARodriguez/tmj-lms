@@ -46,6 +46,22 @@ Visit in browser:
 pytest
 ```
 
+```
+================================================ 7 passed in 0.37s =================================================
+(base) iris@Thaos-MacBook-Air tmj-lms % pytest
+=============================================== test session starts ================================================
+platform darwin -- Python 3.11.5, pytest-9.0.0, pluggy-1.6.0
+rootdir: /Users/iris/tmj-lms
+plugins: anyio-3.5.0, cov-7.0.0
+collected 7 items                                                                                                  
+
+tests/test_forms.py ..                                                                                       [ 28%]
+tests/test_models.py ..                                                                                      [ 57%]
+tests/test_routes.py ...                                                                                     [100%]
+
+================================================ 7 passed in 0.19s =================================================
+
+```
 
 ## 🧱 Tech Stack
 
