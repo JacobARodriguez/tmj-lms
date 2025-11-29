@@ -220,9 +220,11 @@ Jacob — Backend Progress & Models
 
 ### Login Page
 <img width="715" height="441" alt="Screenshot 2025-11-26 at 4 31 25 PM" src="https://github.com/user-attachments/assets/a828e97f-cfc8-47bb-9410-d3daa0d61f79" />
-- (Mareli will add nmore)
+
+- (Mareli will add more)
 
 ### Course Detail Page
+
 - (Jacob will add more)
 
 
