@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=True)
     password_hash = db.Column(db.String(128), nullable=True)
 
-    # NEW: streak + reminder tracking
+    # streak + reminder tracking
     streak_days = db.Column(db.Integer, default=0)
     last_login_date = db.Column(db.Date, nullable=True)
 
@@ -75,3 +75,27 @@ class ModuleNote(db.Model):
     def __repr__(self):
         return f"<ModuleNote user={self.user_id} module={self.module_id}>"
 
+
+class ModuleProgress(db.Model):
+    """Tracks user progress for individual course modules."""
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    # Which user this progress belongs to
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+    # Which course this module is part of
+    course_id = db.Column(db.Integer, db.ForeignKey("course.id"), nullable=False)
+
+    # Display name of the module
+    module_name = db.Column(db.String(128), nullable=False)
+
+    # Completion percentage (0–100)
+    percent_complete = db.Column(db.Integer, default=0)
+
+    # Relationships back to User and Course
+    user = db.relationship("User", backref="module_progress")
+    course = db.relationship("Course", backref="module_progress")
+
+    def __repr__(self) -> str:
+        return f"<ModuleProgress {self.module_name} {self.percent_complete}%>"

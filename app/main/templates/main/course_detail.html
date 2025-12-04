@@ -4,8 +4,8 @@
 
 {% block content %}
 
-{# Safe defaults so the page renders even if backend doesn't pass real data #}
-{% set course_name = course_name or "Intro to Python" %}
+{# Fallbacks so the page still renders if some values are missing #}
+{% set course_name = (course.title if course is defined else course_name) or "Intro to Python" %}
 {% set status = status or "completed" %}
 {% set status_label = status_label or "Completed" %}
 {% set progress_percent = progress_percent or 100 %}
@@ -23,63 +23,60 @@
     </div>
 
     <div class="course-header-media">
-      <img src="{{ url_for('static', filename='img/course-python.png') }}"
-           alt="Intro to Python course thumbnail"
-           class="course-thumbnail">
+      <img
+        src="{{ url_for('static', filename='img/course-python.png') }}"
+        alt="Course thumbnail"
+        class="course-thumbnail"
+      >
     </div>
   </header>
 
-<!-- OVERALL COURSE PROGRESS BAR -->
-<section class="course-section">
-  <h2>Course progress</h2>
-  <p>You have completed {{ progress_percent }}% of this course.</p>
+  <!-- OVERALL COURSE PROGRESS BAR -->
+  <section class="course-section">
+    <h2>Course progress</h2>
+    <p>You have completed {{ progress_percent }}% of this course.</p>
 
-  <div class="progress-bar course-progress-bar">
-    <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
-  </div>
-
-  <!-- NEW: streak display (UI only) -->
-  {% if streak_days %}
-    <p class="streak-text">
-      🔥 Current streak: {{ streak_days }} day{% if streak_days != 1 %}s{% endif %} in a row.
-    </p>
-  {% endif %}
-
-  <!--  NEW: reminder banner (UI only) -->
-  {% if reminder_message %}
-    <div class="reminder-banner">
-      {{ reminder_message }}
+    <div class="progress-bar course-progress-bar">
+      <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
     </div>
-  {% endif %}
-</section>
 
+    <!-- NEW: streak display (UI only) -->
+    {% if streak_days %}
+      <p class="streak-text">
+        🔥 Current streak: {{ streak_days }} day{% if streak_days != 1 %}s{% endif %} in a row.
+      </p>
+    {% endif %}
 
-  <!-- MODULE LIST (fake data for now if none passed) -->
-  {% set modules = modules or [
-    {"name": "Module 1: Getting Started", "progress": 100},
-    {"name": "Module 2: Data Types & Variables", "progress": 80},
-    {"name": "Module 3: Control Flow", "progress": 40}
-  ] %}
+    <!-- NEW: reminder banner (UI only) -->
+    {% if reminder_message %}
+      <div class="reminder-banner">
+        {{ reminder_message }}
+      </div>
+    {% endif %}
+  </section>
+
+  <!-- MODULE LIST (dynamic data) -->
+  {% set modules = modules or [] %}
 
   <section class="course-section">
     <h2>Modules in this course</h2>
 
     <ul class="course-module-list">
-      {% for module in modules %}
+      {% for m in modules %}
         <li class="course-module-item">
           <div class="course-module-header">
-            <span>{{ module.name }}</span>
-            <span>{{ module.progress }}%</span>
+            <span>{{ m.module_name }}</span>
+            <span>{{ m.percent_complete }}%</span>
           </div>
           <div class="progress-bar module-progress-bar">
-            <div class="progress-fill" style="width: {{ module.progress }}%;"></div>
+            <div class="progress-fill" style="width: {{ m.percent_complete }}%;"></div>
           </div>
         </li>
       {% endfor %}
     </ul>
   </section>
 
-  <!--  NEW: MODULE NOTES SECTION -->
+  <!-- NEW: MODULE NOTES SECTION -->
   <section class="course-section course-section-notes">
     <h2>My notes for this module</h2>
 
@@ -115,23 +112,25 @@
       <p>No modules found for this course yet, so notes are disabled.</p>
     {% endif %}
   </section>
-  <!--  END NOTES SECTION -->
+  <!-- END NOTES SECTION -->
 
   <!-- COMPLETION BADGE (only when done) -->
   {% if status == "completed" or progress_percent == 100 %}
-  <section class="course-section course-section-completed-banner">
-    <div class="completed-banner">
-      <div class="completed-text">
-        <h2>🎉 Course completed!</h2>
-        <p>You finished this course on {{ completion_date }}.</p>
+    <section class="course-section course-section-completed-banner">
+      <div class="completed-banner">
+        <div class="completed-text">
+          <h2>🎉 Course completed!</h2>
+          <p>You finished this course on {{ completion_date }}.</p>
+        </div>
+        <div class="completed-badge">
+          <img
+            src="{{ url_for('static', filename='img/Completion Badge.png') }}"
+            alt="Completion badge"
+            class="completion-badge-image"
+          >
+        </div>
       </div>
-      <div class="completed-badge">
-        <img src="{{ url_for('static', filename='img/Completion Badge.png') }}"
-             alt="Completion badge"
-             class="completion-badge-image">
-      </div>
-    </div>
-  </section>
+    </section>
   {% endif %}
 
 </section>
