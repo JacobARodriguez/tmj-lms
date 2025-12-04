@@ -37,6 +37,20 @@
     <div class="progress-bar course-progress-bar">
       <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
     </div>
+
+    {# ✨ NEW: streak display (UI only) #}
+    {% if streak_days %}
+      <p class="streak-text">
+        🔥 Current streak: {{ streak_days }} day{% if streak_days != 1 %}s{% endif %} in a row.
+      </p>
+    {% endif %}
+
+    {# ✨ NEW: reminder banner (UI only) #}
+    {% if reminder_message %}
+      <div class="reminder-banner">
+        {{ reminder_message }}
+      </div>
+    {% endif %}
   </section>
 
   <!-- MODULE LIST (fake data for now if none passed) -->
@@ -122,4 +136,3 @@
 </section>
 
 {% endblock %}
-
