@@ -1,85 +1,45 @@
-# TMJ — Track My Journey  
-_A lightweight LMS companion focused on clear progress tracking_
+TMJ — Track My Journey (LMS Prototype)
 
----
+TMJ (Track My Journey) is a lightweight learning management prototype focused on clear visual progress, module notes, and motivation tools such as streaks and reminders.
 
-## 📘 Overview
+Current status:
+Milestone 1: ✔ Complete
+Milestone 2: ✔ ~70% Complete
 
-TMJ (Track My Journey) is a minimalist LMS prototype designed to help students clearly understand how far they’ve progressed in a course. Many LMS platforms hide progress indicators or bury them in menus, which reduces motivation. TMJ highlights course completion with intuitive progress bars, module breakdowns, and clear completion indicators.
-
-This **Milestone 2** release extends the M1 scaffold into a functional prototype featuring:
-
-- Working login/logout with **Flask-Login**
-- Database-backed course and module progress
-- A full **Course Detail** page with completion UI
-- Updated UI using **AI-generated branding**
-- A passing **pytest** test suite
-
----
-
-## 🚀 How to Run Locally
-
-### 1. Clone the repository
-```bash
+🚀 How to Run Locally
+```
 git clone https://github.com/ThaoHuynh94/tmj-lms.git
 cd tmj-lms
-```
 
-## 2. Create & activate a virtual environment
-* python -m venv .venv
-* source .venv/bin/activate     # Mac/Linux
-* .venv\Scripts\activate        # Windows
+python -m venv .venv
+source .venv/bin/activate     # Mac/Linux
+.venv\Scripts\activate        # Windows
 
-## 3. Install dependencies
 pip install -r requirements.txt
 
-## 4. Run the app
-```
 python run.py
 ```
 
-Visit in browser:
+
+Then open:
+
 👉 http://127.0.0.1:5000/
 
-## 5. Run tests
-```
-pytest
-```
+🧱 Tech Stack
 
-```
-================================================ 7 passed in 0.37s =================================================
-(base) iris@Thaos-MacBook-Air tmj-lms % pytest
-=============================================== test session starts ================================================
-platform darwin -- Python 3.11.5, pytest-9.0.0, pluggy-1.6.0
-rootdir: /Users/iris/tmj-lms
-plugins: anyio-3.5.0, cov-7.0.0
-collected 7 items                                                                                                  
+Flask
 
-tests/test_forms.py ..                                                                                       [ 28%]
-tests/test_models.py ..                                                                                      [ 57%]
-tests/test_routes.py ...                                                                                     [100%]
+Flask-SQLAlchemy
 
-================================================ 7 passed in 0.19s =================================================
+Flask-Login
 
-```
+Flask-WTF / WTForms
 
-## 🧱 Tech Stack
+SQLite
 
-- Flask (backend + routing)
+HTML / CSS / Jinja2
 
-- Flask-SQLAlchemy (SQLite database)
-
-- Flask-Login (authentication)
-
-- WTForms (form validation)
-
--  Jinja2 + HTML/CSS (templates & styling)
-
-- pytest (unit testing)
-
-- AI-generated images/video (branding)
- 
-## 🗂️ Project Structure (M2)
+🗂️ Project Structure
 
 ```
 app/
@@ -87,174 +47,238 @@ app/
 ├── config.py
 ├── models.py
 ├── forms.py
-
+│
 ├── auth/
 │   ├── routes.py
-│   └── templates/auth/
-│       └── login.html
-
+│   └── templates/auth/login.html
+│
 ├── main/
 │   ├── routes.py
 │   └── templates/main/
 │       ├── index.html
 │       ├── feature.html
-│       └── course_detail.html   ← NEW (M2)
-
-├── templates/
-│   └── base.html
-
+│       └── course_detail.html
+│
+├── templates/base.html
 └── static/
     ├── styles.css
-    ├── img/                    ← NEW (M2)
-    │   ├── tmj-logo.png
-    │   ├── Home-page.png
-    │   ├── feature-hero.png
-    │   ├── course-python.png
-    │   ├── Completion Badge.png
-    ├── video/                  ← NEW (M2)
-    │   └── login-hero.mp4
-
-tests/
-    └── test_routes.py   ← NEW (M2)
-
+    ├── img/
+    └── video/
 ```
-## ✨ M2 Features
-### 🔐 Login Page (Mareli + Thao)
 
-- Flask-Login session management
+Top-level:
+```
+run.py
+requirements.txt
+README.md
+```
 
-- WTForms validation
+🟩 Milestone 2 — ~70% Complete
 
-- Neon-style UI
+The project requires 7 key features.
+Here is the current status of each:
 
-- AI-generated hero video
+1) Student logs in/out — 🔄 In Progress
 
-###  📊 Dynamic Progress Updates (Jacob)
+Login page UI + WTForms + CSRF
 
-- SQLAlchemy User/Course/Module models
+Flask-Login integrated
 
-- Module tracking → course progress calculation
+Remaining: real password check, login/logout, user_loader
 
-- /courses/<id> shows real progress
+2) Student views all course progress — 🔄 In Progress
 
-### 🎨 Course Detail UI (Thao)
+Models support progress
 
-- Course thumbnail
+UI ready
 
-- Progress bar
+Remaining: backend route + real data
 
-- Completed & upcoming modules
+3) Student views one course’s details — ✅ UI Complete
 
-- Completion banner
+/courses/<id> route
 
-- Completion badge (AI image)
+Progress bar
 
-###  🏠 UI Enhancements (Thao)
+Module list
 
-- Homepage hero section
+Completion badge
 
-- Feature page hero image
+Safe fallback demo data
 
-- Updated navigation & layout
+4) Student earns badges — ✅ UI Complete
 
-- Consistent global CSS design
+Badge + completion banner
 
-### 🧪 Unit Tests (M2 Requirement)
+Placeholder logic until backend connects
 
-Route tests: /, /feature, /auth/login
+5) Student writes module notes — ✅ Fully Implemented
+
+ModuleNote model
+
+ModuleNoteForm
+
+Save + update logic
+
+Notes textarea + “last saved note” preview
+
+6) Student views streak progress — 🟨 UI Placeholder Ready
+
+Streak UI display implemented
+
+CSS styled
+
+Shows real streak when backend supplies streak_days
+
+7) System sends progress reminders — 🟨 UI Placeholder Ready
+
+Reminder banner UI added
+
+Automatically displays when backend provides reminder_message
+
+🎨 UI Features (Thao)
+🔐 Login Page (Mareli + Thao)
+
+Flask-Login session scaffolding
+
+WTForms validation
+
+Neon-style UI
+
+AI-generated hero video
+
+📊 Dynamic Progress Updates (Jacob)
+
+SQLAlchemy models
+
+Module → course progress logic
+
+/courses/<id> backend hooks (in progress)
+
+🎨 Course Detail UI (Thao)
+
+Course thumbnail
+
+Progress bar
+
+Completed & upcoming modules
+
+Completion banner
+
+Completion badge (AI-generated)
+
+Module notes feature
+
+Streak + reminder UI placeholders
+
+🏠 UI Enhancements (Thao)
+
+Homepage hero
+
+Feature page hero
+
+Updated navigation
+
+Global CSS redesign
+
+Consistent site layout
+
+🧪 Unit Tests (M2 Requirement)
 
 All tests passing:
 
 ```
 3 passed in 0.39s
-
 ```
-###  ✔ Milestone 2 Deliverables Completed
 
-- App runs with no errors
+Routes tested: /, /feature, /auth/login
 
-- 70%+ MVP functionality met
+✔ Milestone 2 Deliverables Completed
 
-- Login/logout functional
+App runs with no errors
 
-- Database-backed progress updates
+70%+ functionality complete
 
-- All pages extend shared base.html
+Login UI functional (backend pending)
 
-- New UI for login, feature, and course detail pages
+Course detail page complete
 
-- Passing unit test suite
+Module Notes fully implemented
 
-- Repo tagged as m2
+Badge UI implemented
 
+Streak + reminders UI ready
 
-### 👥 Team Roles (Updated for M2)
+All pages extend base.html
+
+Unit test suite passing
+
+Repo tagged as m2
+
+👥 Team Roles (Updated for M2)
 Thao — UI / Front-End
 
-* Login page HTML/CSS with hero video
+Login page HTML/CSS + hero video
 
-* Homepage & Feature page hero sections
+Homepage hero
 
-* Course Detail UI (progress bar, modules, completion badge)
+Feature page hero
 
-* Integrated AI-generated images + logo
+Course Detail UI
 
-* Updated base.html layout
+Module Notes feature
 
-* Ensured UI matches sketches
+Streak/reminder UI placeholders
+
+Global CSS + assets
+
+README updates
+
+Unit tests
 
 Mareli — Authentication
 
-* WTForms LoginForm
+WTForms LoginForm
 
-* Login/logout routes
+Login/logout routes
 
-* Flask-Login integration
+Flask-Login integration
 
-* Session handling
+Session handling
+
+user_loader + password verification
 
 Jacob — Backend Progress & Models
 
-* SQLAlchemy models (User, Course, Module)
+SQLAlchemy models
 
-* Course progress calculation
+Course progress calculation
 
-* /courses/<id> backend logic
+/courses/<id> backend logic
 
-* Test structure
+Streak logic & reminders
 
-## 📸 Screenshots 
+Data integration for templates
 
-### Home Page
-<img width="715" height="441" alt="Screenshot 2025-11-26 at 4 30 56 PM" src="https://github.com/user-attachments/assets/da78900a-f244-4727-ae96-4b1710e080b6" />
+📸 Screenshots
+Home Page
+<img width="715" height="441" src="https://github.com/user-attachments/assets/da78900a-f244-4727-ae96-4b1710e080b6" />
+Feature Page
+<img width="715" height="441" src="https://github.com/user-attachments/assets/f7ed03f3-2ee7-482e-95e1-3b9e4d5dc975" /> <img width="715" height="441" src="https://github.com/user-attachments/assets/dee639b3-47f4-4a34-9385-ec615a901b48" />
+Login Page
+<img width="715" height="441" src="https://github.com/user-attachments/assets/a828e97f-cfc8-47bb-9410-d3daa0d61f79" />
+Course Detail Page
 
-### Feature Page
+(More screenshots will be added once backend data is wired in)
 
-<img width="715" height="441" alt="Screenshot 2025-11-26 at 4 31 06 PM" src="https://github.com/user-attachments/assets/f7ed03f3-2ee7-482e-95e1-3b9e4d5dc975" />
-<img width="715" height="441" alt="Screenshot 2025-11-26 at 4 31 12 PM" src="https://github.com/user-attachments/assets/dee639b3-47f4-4a34-9385-ec615a901b48" />
+🎯 Next Steps (M3)
 
+Student dashboard (multiple courses)
 
-### Login Page
-<img width="715" height="441" alt="Screenshot 2025-11-26 at 4 31 25 PM" src="https://github.com/user-attachments/assets/a828e97f-cfc8-47bb-9410-d3daa0d61f79" />
+Instructor dashboard
 
-- (Mareli will add more)
+Achievement/badge system
 
-### Course Detail Page
+Real-time progress updates
 
-- (Jacob will add more)
-
-
-## 🎯 Next Steps (M3)
-
-- Student dashboard (multiple courses)
-
-- Instructor dashboard
-
-- Badge/achievement system
-
-- Real-time progress updates
-
-- Improved module flow UX
-
-
-
+Improved module navigation UX
