@@ -163,7 +163,7 @@ Routes tested: `/`, `/feature`, `/auth/login`.
 | Page | Screenshots |
 | :--- | :--- |
 | **Home Page** | <img width="715" height="441" src="https://github.com/user-attachments/assets/da78900a-f244-4727-ae96-4b1710e080b6" /> |
-| **Feature Page** | <img width="715" height="441" src="https://github.com/user-attachments/assets/f7ed03f3-2ee7-482e-95e1-3b9e4d1dc975" /> <img width="715" height="441" src="https://github.com/user-attachments/assets/dee639b3-47f4-4a34-9385-ec615a901b48" /> |
+| **Feature Page** | <img width="715" height="441" alt="image" src="https://github.com/user-attachments/assets/7fe4c944-718d-4093-b40a-4dc81d4a5768" /> <img width="715" height="441" src="https://github.com/user-attachments/assets/dee639b3-47f4-4a34-9385-ec615a901b48" /> |
 | **Login Page** | <img width="715" height="441" src="https://github.com/user-attachments/assets/a828e97f-cfc8-47bb-9410-d3daa0d61f79" /> |
 | **Course Detail Page** | *(More screenshots will be added once backend data is wired in)* |
 
