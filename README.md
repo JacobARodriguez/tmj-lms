@@ -94,7 +94,7 @@ app/
 
 ## 🟩 Milestone 2 — Status Summary
 
-Milestone 2 requires **7 key features**. Here is the current implementation status:
+Milestone 2 requires **6+ key features**. Here is the current implementation status:
 
 | # | Feature | Status | Notes |
 | :--- | :--- | :--- | :--- |
