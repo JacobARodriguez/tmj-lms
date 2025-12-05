@@ -121,9 +121,23 @@ Milestone 2 requires **6+ key features**. Here is the current implementation sta
 ## 🎨 Deliverables & Enhancements
 
 ### **User Interface (Thao)**
-* Course Detail UI (Thumbnail, Progress bar, Modules, Completion banner/badge, Module notes, Streak/reminder placeholders).
-* Homepage hero, Feature page hero, updated navigation.
-* Global CSS redesign and consistent site layout.
+* Login page UI (hero video), Homepage hero, Feature page hero
+
+* Course Detail UI (progress bar, modules, badge, layout)
+
+* Module Notes feature (model, form, route integration, UI)
+
+* Streak & Reminder UI placeholders
+
+* Global CSS / full UI styling
+
+* Created seed.py for demo database (user, courses, modules, notes)
+
+* Unit tests (routes + forms)
+
+* Updated README & documentation
+
+* Ensured UI matches concept sketches and milestone requirements
 
 ### **Authentication (Mareli + Thao)**
 * Flask-Login session scaffolding.
