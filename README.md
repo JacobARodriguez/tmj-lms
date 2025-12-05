@@ -112,7 +112,7 @@ Milestone 2 requires **6+ key features**. Here is the current implementation sta
 
 | Role | Team Member | Responsibilities |
 | :--- | :--- | :--- |
-| **UI / Front-End** | Thao | Login/Homepage/Feature page hero, Course Detail UI, Module Notes, Streak/Reminder UI, Global CSS, Unit tests, README. |
+| **UI / Front-End** | Thao | Login/Homepage/Feature page hero, Course Detail UI, Module Notes feature, Streak/Reminder UI placeholders, Global CSS/design system, Unit tests, README documentation, Created demo database (`seed.py`) for user/courses/modules/notes. |
 | **Authentication** | Mareli | WTForms, Login/logout routes, Flask-Login integration, Session handling, `user_loader` + password verification. |
 | **Backend Progress & Models** | Jacob | SQLAlchemy models, Course progress calculation, `/courses/<id>` backend logic, Streak logic & reminders, Data integration. |
 
@@ -121,23 +121,17 @@ Milestone 2 requires **6+ key features**. Here is the current implementation sta
 ## 🎨 Deliverables & Enhancements
 
 ### **User Interface (Thao)**
-* Login page UI (hero video), Homepage hero, Feature page hero
+* Course Detail UI (thumbnail, progress bar, modules, completion badge, notes section, streak/reminder placeholders).
 
-* Course Detail UI (progress bar, modules, badge, layout)
+* Homepage hero, Feature page hero, navigation updates.
 
-* Module Notes feature (model, form, route integration, UI)
+* Global CSS redesign and consistent overall layout.
 
-* Streak & Reminder UI placeholders
+### Data Seeding & Project Setup (Thao)
 
-* Global CSS / full UI styling
+* Built seed.py to initialize the demo database (user, courses, modules, notes).
 
-* Created seed.py for demo database (user, courses, modules, notes)
-
-* Unit tests (routes + forms)
-
-* Updated README & documentation
-
-* Ensured UI matches concept sketches and milestone requirements
+* Ensured app runs with real data for login, notes, and course detail pages.
 
 ### **Authentication (Mareli + Thao)**
 * Flask-Login session scaffolding.
