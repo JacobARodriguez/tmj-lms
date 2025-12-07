@@ -190,8 +190,8 @@ Below are key pages of the TMJ — Track My Journey prototype, including the ful
 
 ## 🧠 Course Detail Page — Per-Module Progress, Notes, Badge, Streak & Reminder
 
-<img width="715" height="441" alt="image" src="https://github.com/user-attachments/assets/4f083c3d-39d2-4bdd-99ea-5329c234992c" />
-<img width="715" height="441" alt="image" src="https://github.com/user-attachments/assets/a78e1fe7-a38c-40e1-bef1-2accabf1d1dc" />
+<img width="500" height="1000" alt="image" src="https://github.com/user-attachments/assets/4f083c3d-39d2-4bdd-99ea-5329c234992c" />
+<img width="500" height="1000" alt="image" src="https://github.com/user-attachments/assets/a78e1fe7-a38c-40e1-bef1-2accabf1d1dc" />
 
 
 ---
