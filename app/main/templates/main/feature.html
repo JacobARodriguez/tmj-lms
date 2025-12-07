@@ -43,7 +43,6 @@
   </div>
 {% endif %}
 
-
 <!-- Show courses -->
 {% if course_cards %}
   {% for card in course_cards %}
@@ -75,6 +74,13 @@
           <p>No module progress yet for this course.</p>
         {% endfor %}
       </div>
+
+      <!-- Link to course detail page (badge + notes) -->
+      <a href="{{ url_for('main.course_detail', course_id=card.course.id) }}"
+         class="btn-primary"
+         style="margin-top: 0.75rem; display: inline-block;">
+        View course detail
+      </a>
 
     </div>
   {% endfor %}
