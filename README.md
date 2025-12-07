@@ -180,11 +180,11 @@ Below are key pages of the TMJ — Track My Journey prototype, including the ful
 
 | Course | Screenshot |
 |--------|------------|
-| **Intro to Python — Full Course Completion** | <img width="715" height="441" alt="Screenshot 2025-12-07 at 12 38 15 PM" src="https://github.com/user-attachments/assets/284045b1-a170-4563-b156-4f46cab02032" />|
-| **Study Skills & Habits — Partial Progress** | <img width="715" height="441" alt="Screenshot 2025-12-07 at 1 05 38 PM" src="https://github.com/user-attachments/assets/8a72b80f-fec5-4a51-885f-90a3b8cf2790" />|
-| **Time Management Essentials — Early Progress** | <img width="715" height="441" alt="Screenshot 2025-12-07 at 1 06 01 PM" src="https://github.com/user-attachments/assets/104c977c-3d1a-4afd-a646-712e2e0bd788" />|
-| **Effective Note-Taking — Mixed Completion** | <img width="715" height="441" alt="Screenshot 2025-12-07 at 1 06 13 PM" src="https://github.com/user-attachments/assets/93fade41-0973-4f6a-b7da-e2044d2c8c78" />|
-| **Mindfulness for Students — Low Progress** | <img width="715" height="441" alt="Screenshot 2025-12-07 at 1 06 24 PM" src="https://github.com/user-attachments/assets/975c84ee-b84c-4288-87d4-39dc20666217" />|
+| **Intro to Python — Full Course Completion** | <img width="500" height="1000" alt="Screenshot 2025-12-07 at 12 38 15 PM" src="https://github.com/user-attachments/assets/284045b1-a170-4563-b156-4f46cab02032" />|
+| **Study Skills & Habits — Partial Progress** | <img width="500" height="1000" alt="Screenshot 2025-12-07 at 1 05 38 PM" src="https://github.com/user-attachments/assets/8a72b80f-fec5-4a51-885f-90a3b8cf2790" />|
+| **Time Management Essentials — Early Progress** | <img width="500" height="1000" alt="Screenshot 2025-12-07 at 1 06 01 PM" src="https://github.com/user-attachments/assets/104c977c-3d1a-4afd-a646-712e2e0bd788" />|
+| **Effective Note-Taking — Mixed Completion** | <img width="500" height="1000" alt="Screenshot 2025-12-07 at 1 06 13 PM" src="https://github.com/user-attachments/assets/93fade41-0973-4f6a-b7da-e2044d2c8c78" />|
+| **Mindfulness for Students — Low Progress** | <img width="500" height="1000" alt="Screenshot 2025-12-07 at 1 06 24 PM" src="https://github.com/user-attachments/assets/975c84ee-b84c-4288-87d4-39dc20666217" />|
 
 ---
 
