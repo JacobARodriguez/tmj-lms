@@ -14,7 +14,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 
 # Import built-in validators (like "required" fields)
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Optional
 
 
 # -------------------------------------------------------------
@@ -57,7 +57,7 @@ class LoginForm(FlaskForm):
 #    (via {{ form.hidden_tag() }}) using SECRET_KEY from config.py.
 # -------------------------------------------------------------
 
-#Simple form: one textarea & submit button.
+# Simple form: one textarea & submit button.
 class ModuleNoteForm(FlaskForm):
-    content = TextAreaField("Notes")
+    content = TextAreaField("Notes", validators=[Optional()])
     submit = SubmitField("Save notes")

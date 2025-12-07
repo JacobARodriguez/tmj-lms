@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
 
     # streak + reminder tracking
     streak_days = db.Column(db.Integer, default=0)
-    last_login_date = db.Column(db.Date, nullable=True)
+    last_active_date = db.Column(db.Date, nullable=True)
 
     # one-to-many: user → courses
     courses = db.relationship("Course", backref="user", lazy=True)
@@ -52,8 +52,8 @@ class Course(db.Model):
     __tablename__ = "course"
 
     id = db.Column(db.Integer, primary_key=True)
-
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
     title = db.Column(db.String(128), nullable=False)
 
     # simple numeric progress (0–100)
@@ -72,7 +72,7 @@ class Course(db.Model):
         return self.progress_percent >= 100 or self.completed_at is not None
 
     def __repr__(self):
-        return f"<Course {self.title} ({self.progress_percent}%)>"
+        return f"<Course {self.title}>"
 
 
 # =============================================================
@@ -82,8 +82,8 @@ class Module(db.Model):
     __tablename__ = "module"
 
     id = db.Column(db.Integer, primary_key=True)
-
     course_id = db.Column(db.Integer, db.ForeignKey("course.id"), nullable=False)
+
     title = db.Column(db.String(128), nullable=False)
     order_index = db.Column(db.Integer, default=0)
 
@@ -94,7 +94,7 @@ class Module(db.Model):
     notes = db.relationship("ModuleNote", backref="module", lazy=True)
 
     def __repr__(self):
-        return f"<Module {self.title} (course={self.course_id})>"
+        return f"<Module {self.title}>"
 
 
 # =============================================================
@@ -104,7 +104,6 @@ class ModuleNote(db.Model):
     __tablename__ = "module_note"
 
     id = db.Column(db.Integer, primary_key=True)
-
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     module_id = db.Column(db.Integer, db.ForeignKey("module.id"), nullable=False)
 
@@ -112,7 +111,7 @@ class ModuleNote(db.Model):
     created_at = db.Column(db.Date, default=date.today)
 
     def __repr__(self):
-        return f"<ModuleNote user={self.user_id} module={self.module_id}>"
+        return f"<ModuleNote {self.id}>"
 
 
 # =============================================================
@@ -138,4 +137,4 @@ class ModuleProgress(db.Model):
     percent_complete = db.Column(db.Integer, default=0)
 
     def __repr__(self) -> str:
-        return f"<ModuleProgress {self.module_name} {self.percent_complete}%>"
+        return f"<ModuleProgress {self.module_name}: {self.percent_complete}%>"

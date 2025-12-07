@@ -17,6 +17,10 @@ from flask_login import (
     login_required,
 )
 
+from datetime import date
+
+from app import db
+
 from ..forms import LoginForm
 from ..models import User
 
@@ -52,6 +56,9 @@ def login():
 
         login_user(user, remember=remember_flag)
 
+        # After real authentication is implemented, update the user's streak:
+        # update_streak_for_user(user)
+
         # Redirect to next page or homepage
         next_page = request.args.get("next")
         if not next_page or not next_page.startswith("/"):
@@ -73,3 +80,26 @@ def logout():
     flash("You have been logged out.", "info")
     return redirect(url_for("auth.login"))
 
+
+def update_streak_for_user(user):
+    """
+    Update user's streak based on their last_active_date.
+    Call this AFTER a successful login (once real auth exists).
+    """
+
+    today = date.today()
+
+    if user.last_active_date is None:
+        user.streak_days = 1
+    elif user.last_active_date == today:
+        db.session.commit()
+        return
+    else:
+        days = (today - user.last_active_date).days
+        if days == 1:
+            user.streak_days += 1
+        else:
+            user.streak_days = 1
+
+    user.last_active_date = today
+    db.session.commit()

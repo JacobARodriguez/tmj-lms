@@ -25,12 +25,16 @@ def test_create_user():
         db.create_all()
 
         user = User(username="unit_test_user")
+        # need a non-null password_hash
+        user.set_password("dummy-password")
+
         db.session.add(user)
         db.session.commit()
 
-        saved = User.query.filter_by(username="unit_test_user").first()
-        assert saved is not None
-        assert saved.username == "unit_test_user"
+        fetched = User.query.filter_by(username="unit_test_user").first()
+        assert fetched is not None
+        assert fetched.username == "unit_test_user"
+        assert fetched.check_password("dummy-password")
 
 
 def test_create_course():
@@ -40,12 +44,19 @@ def test_create_course():
         db.drop_all()
         db.create_all()
 
-        # Adjust 'title' → 'name' if your model uses a different field
-        course = Course(title="Intro to Python")
+        # first create an owner user (course.user_id is NOT NULL)
+        owner = User(username="owner")
+        owner.set_password("dummy-password")
+        db.session.add(owner)
+        db.session.commit()
+
+        # now create the course tied to that user
+        course = Course(user_id=owner.id, title="Intro to Python")
         db.session.add(course)
         db.session.commit()
 
-        saved = Course.query.filter_by(title="Intro to Python").first()
-        assert saved is not None
-        assert saved.title == "Intro to Python"
+        fetched = Course.query.filter_by(title="Intro to Python").first()
+        assert fetched is not None
+        assert fetched.title == "Intro to Python"
+        assert fetched.user_id == owner.id
 
