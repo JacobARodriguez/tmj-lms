@@ -22,10 +22,6 @@
 </section>
 
 
-<!-- ==========================================
-     PROGRESS DEMO (NOW DYNAMIC FOR ALL COURSES)
-     ========================================== -->
-
 <h1>Progress Demo</h1>
 <p>This page shows a sample layout for tracking progress across modules.</p>
 
@@ -43,7 +39,7 @@
   </div>
 {% endif %}
 
-<!-- Show courses -->
+<!-- Show all courses -->
 {% if course_cards %}
   {% for card in course_cards %}
 
@@ -53,16 +49,17 @@
     {% set color = '#7C3AED' %} {# default purple #}
 
     {% if card.course.title == 'Study Skills & Habits' %}
-      {% set color = '#2563EB' %} {# blue #}
+      {% set color = '#2563EB' %}
     {% elif card.course.title == 'Time Management Essentials' %}
-      {% set color = '#DC2626' %} {# red #}
+      {% set color = '#DC2626' %}
     {% elif card.course.title == 'Effective Note-Taking' %}
-      {% set color = '#16A34A' %} {# green #}
+      {% set color = '#16A34A' %}
     {% elif card.course.title == 'Mindfulness for Students' %}
-      {% set color = '#CA8A04' %} {# yellow/gold #}
+      {% set color = '#CA8A04' %}
     {% endif %}
 
-    <div class="course-progress-card" style="border-left: 6px solid {{ color }};">
+    <div class="course-progress-card"
+         style="border-left: 6px solid {{ color }}; margin-bottom: 2rem; padding-bottom: 1rem;">
 
       <!-- Course title + progress -->
       <div class="progress-header">
@@ -95,7 +92,7 @@
         {% endfor %}
       </div>
 
-      <!-- Link to course detail page (badge + notes) -->
+      <!-- Link to Course Detail -->
       <a href="{{ url_for('main.course_detail', course_id=card.course.id) }}"
          class="btn-primary"
          style="margin-top: 0.75rem; display: inline-block;">
@@ -103,6 +100,7 @@
       </a>
 
     </div>
+
   {% endfor %}
 
 {% else %}
