@@ -206,3 +206,14 @@ def course_detail(course_id):
         streak_days=streak_days,
         reminder_message=reminder_message,
     )
+
+
+# --------------------------------------------
+# Error handlers
+# --------------------------------------------
+@main_bp.app_errorhandler(404)
+def not_found(error):
+    """
+    Custom 404 page for any route handled by this blueprint.
+    """
+    return render_template("errors/404.html"), 404
