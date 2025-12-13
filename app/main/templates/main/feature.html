@@ -1,38 +1,38 @@
 {% extends "base.html" %}
-{% block title %}Feature — Track My Journey{% endblock %}
+{% block title %}Your Dashboard — Track My Journey{% endblock %}
 
 {% block content %}
 
 <!-- ==========================================
-     HERO SECTION (neon image)
+     HERO SECTION (Student Dashboard)
      ========================================== -->
 <section class="hero hero-feature">
   <div class="hero-text">
-    <h1>See your learning journey at a glance</h1>
+    <h1>Your Learning Dashboard</h1>
     <p>
-      TMJ shows your course progress with clear, glowing dashboards so you always know what’s next.
+      Track your progress across all your courses — stay motivated, stay organized, and follow your journey step by step.
     </p>
   </div>
 
   <div class="hero-media">
     <img src="{{ url_for('static', filename='img/feature-hero.png') }}"
-         alt="Futuristic dashboard showing course progress cards"
+         alt="Dashboard showing course progress cards"
          class="feature-hero-image">
   </div>
 </section>
 
 
-<h1>Progress Demo</h1>
-<p>This page shows a sample layout for tracking progress across modules.</p>
+<h1>Your Course Progress</h1>
+<p>Review your course completion, streak, module progress, and reminders — all in one place.</p>
 
-<!-- Show streak once -->
+<!-- Show streak -->
 {% if streak_days %}
   <p class="streak-text">
     🔥 Current streak: {{ streak_days }} day{% if streak_days != 1 %}s{% endif %} in a row.
   </p>
 {% endif %}
 
-<!-- Show reminder once -->
+<!-- Show reminder -->
 {% if reminder_message %}
   <div class="reminder-banner">
     {{ reminder_message }}
@@ -104,7 +104,7 @@
   {% endfor %}
 
 {% else %}
-  <p>No courses found yet. Add a course to start tracking progress.</p>
+  <p>No courses found yet. Once your courses are added, they'll appear here.</p>
 {% endif %}
 
 {% endblock %}
