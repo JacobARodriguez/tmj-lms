@@ -1,13 +1,25 @@
-# 📚 TMJ — Track My Journey (LMS Prototype)
+# 📚 TMJ — Track My Journey (Final MVP – Milestone 3)
 
-**TMJ (Track My Journey)** is a lightweight LMS companion focused on **clear visual course progress**, **module notes**, **completion badges**, **streak tracking**, and **reminder prompts** to keep students motivated.
+**TMJ (Track My Journey)** is a lightweight LMS companion that gives students clear visibility into their learning progress. TMJ enhances traditional LMS platforms by providing:
+
+* **Visual course progress bars**
+* **Module-level progress tracking**
+* **Completion badges**
+* **Personal notes per module**
+* **Streak tracking**
+* **Reminder prompts** to encourage consistent study habits
+
+This repository contains the Milestone 3 (**Final Release**) of the TMJ project.
 
 ---
 
-## 🟢 Current Status
+## 🟢 Project Status
 
-* **Milestone 1:** ✔ Complete
-* **Milestone 2:** ✔ 100% Complete — All 7 required features implemented!
+| Milestone | Status | Notes |
+| :--- | :--- | :--- |
+| **M1 — Prototype** | ✔ Complete | |
+| **M2 — Functional Prototype** | ✔ 100% Complete | All 7 required features implemented. |
+| **M3 — Final MVP** | ✔ Complete | Authentication, dashboard, UI polish, test suite, and final documentation. |
 
 ---
 
@@ -49,18 +61,25 @@ To get the project up and running on your local machine:
 
 👉 http://127.0.0.1:5000/
 
+
+6. ### Demo Login
+* **Username:**  student1
+* **Password:**  password123
+
 ---
 
 ## 🧱 Tech Stack
 
-| Component | Technology | Description |
-| :--- | :--- | :--- |
-| **Backend Framework** | Flask | Lightweight Python web framework. |
-| **Database** | SQLite + Flask-SQLAlchemy | ORM for handling models and data. |
-| **Authentication** | Flask-Login | Secure session management. |
-| **Forms** | Flask-WTF / WTForms | Form generation and validation. |
-| **Templating** | Jinja2 | Used for dynamic HTML generation. |
-| **Frontend** | HTML + CSS | Custom design system for the UI. |
+| **Component**         | **Technology**             |
+| --------------------- | -------------------------- |
+| 🖥 **Backend**        | Flask                      |
+| 🗄 **Database**       | SQLite + SQLAlchemy ORM    |
+| 🔐 **Authentication** | Flask-Login                |
+| 📝 **Forms**          | Flask-WTF + WTForms        |
+| 🧩 **Templates**      | Jinja2                     |
+| 🎨 **Styling**        | Custom CSS                 |
+| 🧪 **Testing**        | pytest + Flask test client |
+
 
 ---
 
@@ -71,120 +90,107 @@ The structure follows a clean Flask blueprint pattern:
 
 ## 🗂️ Project Structure
 
-The application structure follows a standard Flask blueprint pattern:
 ```
 app/
 ├── __init__.py          # App factory + DB + Login setup
-├── config.py            # Secret key + DB URI
-├── models.py            # User, Course, Module, ModuleNote, ModuleProgress
-├── forms.py             # LoginForm, ModuleNoteForm
+├── config.py            # App configuration
+├── models.py            # User, Course, Module, ModuleProgress, ModuleNote
+├── forms.py             # Forms: LoginForm, ModuleNoteForm
 │
 ├── auth/
-│   ├── routes.py        # Login + logout
+│   ├── routes.py        # Login + logout logic
 │   └── templates/auth/login.html
 │
 ├── main/
-│   ├── routes.py        # /, /feature, /courses/<id>
+│   ├── routes.py        # /, /feature (dashboard), /courses/<id>
 │   └── templates/main/
 │       ├── index.html
 │       ├── feature.html
 │       └── course_detail.html
 │
-├── templates/base.html  # Layout, navbar, flash messages
+├── templates/base.html  # Shared layout, navbar, flash messages
 │
 └── static/
     ├── styles.css
-    ├── img/             # course thumbnails + branding
+    ├── img/
     └── video/
 
-
 ```
 
 ---
+## 🟩 Milestone 3 Features — MVP Complete
 
-## 🟩 Milestone 2 — All 7 Required Features (✔ COMPLETE)
+### ✔ Authentication
+* Secure login + logout.
+* **Dashboard requires login** (Implemented for M3).
+* Personalized streak + reminder based on activity.
 
-| # | Feature | Status | Description |
-| :--- | :--- | :--- | :--- |
-| **1** | Student logs in/out | **✔ Complete** | Secure login/logout with hashed passwords, session handling, `user_loader`. |
-| **2** | Student views all course progress | **✔ Complete** | Multi-course dashboard on Feature page showing progress, streak, reminders. |
-| **3** | Student views one course’s details | **✔ Complete** | Course detail page with progress, modules, badge, notes, streak, reminder. |
-| **4** | Student earns badges | **✔ Complete** | Auto-display of completion banner + badge when progress hits 100%. |
-| **5** | Student writes module notes | **✔ Complete** | Notes saved per-user per-module with editable textarea + preview. |
-| **6** | Student views streak progress | **✔ Complete** | Streak calculated on login + displayed across pages. |
-| **7** | System sends progress reminders | **✔ Complete** | Reminder banner shows when user inactive $\geq 3$ days (dynamic backend logic). |
+### ✔ Dashboard (`/feature`)
+* Shows **only the logged-in student's courses**.
+* Real-time progress calculation from `ModuleProgress`.
+* Streak + inactivity reminder display.
 
+### ✔ Course Detail Page
+* Per-module progress.
+* Notes (save + update).
+* Completion badge + banner.
+* Streak + reminder display.
+
+### ✔ UI/UX Enhancements
+* Full custom design system implemented.
+* Consistent navbar + flash messages.
+* Dashboard and detail pages redesigned for clarity.
+* Status pill styling corrected (`completed` / `in-progress`).
+
+### ✔ Testing (16 Tests)
+* Unit tests for forms & models.
+* Integration tests for login, logout, dashboard, notes, and protected routes.
+* 404 custom page tested.
+* **87% coverage.**
 ---
-
-## 👥 Team Roles (M2)
-
-| Role | Team Member | Key Responsibilities |
-| :--- | :--- | :--- |
-| **UI / Front-End** | Thao | All major UI/UX, Global CSS, Multi-course dashboard, Course Detail UI, Module Notes, Streak/Reminder UI, Unit tests, `seed.py` demo database. |
-| **Documentation** | Thao | Wrote **Milestone 2 PDF deliverable**, including Updated Concept Overview, 7 Use Cases, Implementation Summary, and Testing Plan. Also authored and maintained the README. |
-| **Authentication** | Mareli | WTForms LoginForm, Login/Logout routes, Password hashing, Flask-Login integration, Session handling. |
-| **Backend Progress & Models** | Jacob | SQLAlchemy models, ModuleProgress logic, Course progress calculation, Streak logic, Reminder logic, Dynamic backend routes. |
-
-
----
-
-## 🎨 Deliverables & Enhancements
-
-### **User Interface (Thao)**
-* **Course Detail UI:** Dynamic thumbnails (5 images), progress bar/status, module progress list, completion badge + banner, module notes section, streak + reminder UI.
-* **Layout:** Homepage/Feature hero, updated global navbar, multi-course progress dashboard layout.
-* **Styling:** Global CSS redesign and responsive improvements.
-
-### **Data Seeding & Setup (Thao)**
-* Built **`seed.py`** to initialize real demo data (1 student, 5 courses, progress records, notes, streak/reminder data).
-* Ensured the entire application runs cleanly and displays dynamic data upon execution.
-
-### **Dynamic Progress, Streaks & Reminders (Jacob)**
-* Implemented **`ModuleProgress`** model for granular tracking.
-* Logic for **course progress calculation** (percentage).
-* **Streak logic** updated on user login.
-* **Reminder logic** (checks for inactivity $\geq 3$ days).
-* Multi-course backend integration for `/feature` and `/courses/<id>`.
-
-### **Authentication (Mareli + Thao)**
-* Complete Flask-Login integration.
-* Secure password hashing and verification.
-* WTForms `LoginForm` implementation.
-* Neon-style login UI with hero video.
-
-### **🧪 Testing**
+## Test Results (M3)
 All tests pass:
-```bash
-================================ test session starts ========================================================
-platform darwin -- Python 3.11.5, pytest-9.0.0, pluggy-1.6.0
-rootdir: /Users/iris/tmj-lms
-plugins: anyio-3.5.0, cov-7.0.0
-collected 12 items                                                                                                                                                                                         
+```
+16 passed, 0 failed
+```
+### Coverage Report
+Generated using:
 
-tests/test_forms.py ...                                                                                                                                                                              [ 25%]
-tests/test_models.py ...                                                                                                                                                                             [ 50%]
-tests/test_routes.py ......                                                                                                                                                                          [100%]
-
-=================================warnings summary ==============================================================
-tests/test_routes.py::test_course_detail_after_login_with_progress
-tests/test_routes.py::test_course_detail_after_login_with_progress
-  /Users/iris/tmj-lms/app/__init__.py:30: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
-    return User.query.get(int(user_id))
-
-tests/test_routes.py::test_course_detail_after_login_with_progress
-  /Users/iris/anaconda3/lib/python3.11/site-packages/flask_sqlalchemy/query.py:30: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
-    rv = self.get(ident)
-
--- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-================================= 12 passed in 0.95s =================================================
+```
+pytest --cov=app --cov-report=term-missing
 ```
 
-**Routes tested:**  
-- `/` – Home page  
-- `/feature` – Multi-course dashboard  
-- `/auth/login` – Login (GET + POST)  
-- `/auth/logout` – Logout flow  
-- `/courses/<id>` – Redirect when not logged in + render when authenticated  
+```
+=============================== tests coverage ================================
+_______________ coverage: platform darwin, python 3.11.5-final-0 _______________
+
+Name                   Stmts   Miss  Cover   Missing
+----------------------------------------------------
+app/__init__.py           21      0   100%
+app/auth/__init__.py       0      0   100%
+app/auth/routes.py        46      8    83%   38, 94-102
+app/config.py              6      0   100%
+app/forms.py              11      0   100%
+app/main/__init__.py       0      0   100%
+app/main/routes.py        78     11    86%   36-37, 42-43, 50, 69, 73, 105-116, 170
+app/models.py             62      6    90%   45, 72, 75, 97, 114, 140
+app/run.py                 4      4     0%   1-5
+----------------------------------------------------
+TOTAL                    228     29    87%
+======================== 16 passed, 3 warnings in 1.42s ========================
+
+
+```
+### Coverage Summary (for reports)
+* **Total Coverage:** ~87%
+
+* **Routes:** ~85–100% covered
+
+* **Models:** ~90% covered
+
+* **Forms:** 100%
+
+* **Integration tests:** login, logout, dashboard, detail view, notes, 404
 
 ---
 
@@ -223,10 +229,26 @@ Below are key pages of the TMJ — Track My Journey prototype, including the ful
 
 ---
 
-## 🎯 Next Steps (M3)
+## 🎯 Next Steps (Stretch Goals)
 
-* Student dashboard (multiple courses).
-* Instructor dashboard.
-* Achievement/badge system.
-* Real-time progress updates.
-* Improved module navigation UX.
+These features were planned but not required for M3:
+
+Instructor dashboard
+
+Expanded badge/achievement system
+
+Real-time progress updates
+
+Improved module navigation
+
+Calendar-based streak visualization
+
+---
+## 🏁 Final Release Tag
+
+Milestone 3 is tagged as:
+
+```
+git tag m3
+git push --tags
+```
