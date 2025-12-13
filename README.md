@@ -88,8 +88,6 @@ To get the project up and running on your local machine:
 The structure follows a clean Flask blueprint pattern:
 ---
 
-## 🗂️ Project Structure
-
 ```
 app/
 ├── __init__.py          # App factory + DB + Login setup
@@ -148,7 +146,7 @@ app/
 * 404 custom page tested.
 * **87% coverage.**
 ---
-## Test Results (M3)
+## 🧪 Test Results (M3)
 All tests pass:
 ```
 16 passed, 0 failed
@@ -233,15 +231,15 @@ Below are key pages of the TMJ — Track My Journey prototype, including the ful
 
 These features were planned but not required for M3:
 
-Instructor dashboard
+- Instructor dashboard
 
-Expanded badge/achievement system
+- Expanded badge/achievement system
 
-Real-time progress updates
+- Real-time progress updates
 
-Improved module navigation
+- Improved module navigation
 
-Calendar-based streak visualization
+- Calendar-based streak visualization
 
 ---
 ## 🏁 Final Release Tag
