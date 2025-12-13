@@ -84,27 +84,30 @@ def index():
     return render_template("main/index.html")
 
 
+# --------------------------------------------
+# FEATURE / DASHBOARD (LOGIN REQUIRED)
+# --------------------------------------------
 @main_bp.route("/feature")
+@login_required
 def feature():
     """
-    Feature demo page wired to real progress data
-    for ALL of the student's courses.
+    Student dashboard showing progress across all of
+    the logged-in student's courses.
     """
 
-    # Get all courses (for the logged-in user if possible)
-    if current_user.is_authenticated:
-        courses = Course.query.filter_by(user_id=current_user.id).all()
-    else:
-        courses = Course.query.all()
+    # Only load courses belonging to the logged-in user
+    courses = Course.query.filter_by(user_id=current_user.id).all()
 
     course_cards = []
 
     for course in courses:
-        # Load this course's module progress for this user
-        query = ModuleProgress.query.filter_by(course_id=course.id)
-        if current_user.is_authenticated:
-            query = query.filter_by(user_id=current_user.id)
-        modules = query.order_by(ModuleProgress.id).all()
+        # Load module progress for this user only
+        modules = (
+            ModuleProgress.query
+            .filter_by(course_id=course.id, user_id=current_user.id)
+            .order_by(ModuleProgress.id)
+            .all()
+        )
 
         status, status_label, progress_percent, completion_date = (
             update_course_progress(course, modules)
@@ -121,10 +124,8 @@ def feature():
             }
         )
 
-    streak_days = current_user.streak_days if current_user.is_authenticated else 0
-    reminder_message = (
-        get_reminder_message(current_user) if current_user.is_authenticated else None
-    )
+    streak_days = current_user.streak_days
+    reminder_message = get_reminder_message(current_user)
 
     return render_template(
         "main/feature.html",
@@ -135,7 +136,7 @@ def feature():
 
 
 # --------------------------------------------
-# Route 3: Course Detail Page (notes + real progress)
+# COURSE DETAIL PAGE (LOGIN REQUIRED)
 # --------------------------------------------
 @main_bp.route("/courses/<int:course_id>", methods=["GET", "POST"])
 @login_required
@@ -150,7 +151,7 @@ def course_detail(course_id):
     module_note = None
 
     if current_module:
-        # Look for an existing note for this user + module
+        # Look for an existing note
         module_note = ModuleNote.query.filter_by(
             user_id=current_user.id,
             module_id=current_module.id,
@@ -176,25 +177,25 @@ def course_detail(course_id):
         elif request.method == "GET" and module_note is not None:
             form.content.data = module_note.content
 
-    # ---------------------------------
-    # Real progress data using ModuleProgress
-    # ---------------------------------
-    query = ModuleProgress.query.filter_by(course_id=course.id)
-    query = query.filter_by(user_id=current_user.id)
-    modules = query.order_by(ModuleProgress.id).all()
+    # Load module progress for this course + user
+    modules = (
+        ModuleProgress.query
+        .filter_by(course_id=course.id, user_id=current_user.id)
+        .order_by(ModuleProgress.id)
+        .all()
+    )
 
     status, status_label, progress_percent, completion_date = update_course_progress(
         course, modules
     )
 
-    course_name = course.title if hasattr(course, "title") else "Course"
     streak_days = current_user.streak_days
     reminder_message = get_reminder_message(current_user)
 
     return render_template(
         "main/course_detail.html",
         course=course,
-        course_name=course_name,
+        course_name=course.title,
         current_module=current_module,
         form=form,
         module_note=module_note,
@@ -213,7 +214,5 @@ def course_detail(course_id):
 # --------------------------------------------
 @main_bp.app_errorhandler(404)
 def not_found(error):
-    """
-    Custom 404 page for any route handled by this blueprint.
-    """
+    """Custom 404 page."""
     return render_template("errors/404.html"), 404
