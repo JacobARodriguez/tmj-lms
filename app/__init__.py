@@ -17,19 +17,23 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # init extensions
+    # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
 
-    # import models so User exists
+    # Import models so User exists
     from .models import User
 
-    # user loader for Flask-Login
+    # ---------------------------------------------------------
+    # Flask-Login user loader (SQLAlchemy 2.x style to avoid warnings)
+    # ---------------------------------------------------------
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id))
+        # Use db.session.get() instead of User.query.get() to avoid
+        # SQLAlchemy 2.x LegacyAPIWarning.
+        return db.session.get(User, int(user_id))
 
-    # register blueprints
+    # Register blueprints
     from .auth.routes import auth_bp
     from .main.routes import main_bp
 
