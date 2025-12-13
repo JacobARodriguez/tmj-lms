@@ -7,7 +7,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from app import create_app, db
-from app.models import User, Course, ModuleProgress
+from app.models import User, Course, Module, ModuleProgress, ModuleNote
 
 
 def create_test_app():
@@ -83,6 +83,26 @@ def test_login_page_get():
     client = app.test_client()
     response = client.get("/auth/login")
     assert response.status_code == 200
+
+
+def test_invalid_login_shows_error():
+    """
+    Invalid credentials should trigger the flash error message.
+    """
+    app = create_test_app()
+    with app.app_context():
+        db.create_all()
+
+    client = app.test_client()
+    resp = client.post(
+        "/auth/login",
+        data={"username": "fake-user", "password": "wrong-password"},
+        follow_redirects=True,
+    )
+
+    assert resp.status_code == 200
+    # Matches flash("Invalid username or password.", "danger")
+    assert b"Invalid username or password." in resp.data
 
 
 def test_login_and_logout_flow():
@@ -189,6 +209,63 @@ def test_course_detail_after_login_with_progress():
     assert b"Intro to Python" in resp_course.data
     assert b"Course progress" in resp_course.data
     assert b"My notes for this module" in resp_course.data
+
+
+def test_course_notes_can_be_saved():
+    """
+    After logging in, posting to /courses/<id> with note content
+    should save the note and show the flash + note text.
+    """
+    app = create_test_app()
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
+
+        # Create user
+        user = User(username="note_student")
+        user.set_password("password123")
+        db.session.add(user)
+        db.session.commit()
+
+        # Create course
+        course = Course(user_id=user.id, title="Intro to Python")
+        db.session.add(course)
+        db.session.commit()
+
+        # Create a module so course_detail has a current_module
+        module = Module(
+            course_id=course.id,
+            title="Getting Started",
+            order_index=1,
+            is_completed=False,
+        )
+        db.session.add(module)
+        db.session.commit()
+
+        course_id = course.id
+
+        client = app.test_client()
+
+        # Log in
+        resp_login = client.post(
+            "/auth/login",
+            data={"username": "note_student", "password": "password123"},
+            follow_redirects=True,
+        )
+        assert resp_login.status_code == 200
+
+        # Post a note to the course detail page
+        note_text = "This is a test note from the integration test."
+        resp_post = client.post(
+            f"/courses/{course_id}",
+            data={"content": note_text},
+            follow_redirects=True,
+        )
+        assert resp_post.status_code == 200
+
+        # Check for success flash + note text on the page
+        assert b"Notes saved." in resp_post.data
+        assert note_text.encode("utf-8") in resp_post.data
 
 
 def test_404_page_renders():
