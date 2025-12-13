@@ -28,17 +28,51 @@ def test_home_page():
     assert response.status_code == 200
 
 
-def test_feature_page_no_data():
+def test_feature_page_requires_login():
     """
-    Even with no courses in the DB, /feature should render (with the empty state message).
+    /feature should redirect to /auth/login when the user is not logged in.
     """
     app = create_test_app()
     with app.app_context():
         db.create_all()
 
     client = app.test_client()
-    response = client.get("/feature")
-    assert response.status_code == 200
+    resp = client.get("/feature")
+    assert resp.status_code == 302
+    assert "/auth/login" in resp.headers["Location"]
+
+
+def test_feature_page_after_login():
+    """
+    After logging in, /feature should render successfully as the
+    student's dashboard, even if they have no courses yet.
+    """
+    app = create_test_app()
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
+
+        # Create a user with no courses yet
+        user = User(username="student_feature")
+        user.set_password("password123")
+        db.session.add(user)
+        db.session.commit()
+
+        client = app.test_client()
+
+        # Log in
+        resp_login = client.post(
+            "/auth/login",
+            data={"username": "student_feature", "password": "password123"},
+            follow_redirects=True,
+        )
+        assert resp_login.status_code == 200
+
+        # Now access /feature
+        resp_feature = client.get("/feature")
+        assert resp_feature.status_code == 200
+        # Check for a key phrase from the updated template
+        assert b"Your Course Progress" in resp_feature.data
 
 
 def test_login_page_get():
@@ -155,7 +189,8 @@ def test_course_detail_after_login_with_progress():
     assert b"Intro to Python" in resp_course.data
     assert b"Course progress" in resp_course.data
     assert b"My notes for this module" in resp_course.data
-    
+
+
 def test_404_page_renders():
     app = create_test_app()
     with app.app_context():
@@ -165,4 +200,3 @@ def test_404_page_renders():
     resp = client.get("/this-route-does-not-exist")
     assert resp.status_code == 404
     assert b"Page Not Found" in resp.data  # match text from your 404.html
-
